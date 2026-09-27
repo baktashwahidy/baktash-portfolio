@@ -1,61 +1,15 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
-
-import { siteConfig } from "@/data/site";
-
 export function Footer() {
   return (
-    <footer className="bg-ink pb-8 text-canvas">
+    <footer className="-mt-8 flex min-h-[145px] flex-col justify-end bg-ink pb-6 pt-8 text-canvas sm:min-h-[160px] sm:pb-7 sm:pt-8">
       <div className="page-shell">
-        <div className="grid gap-8 border-t border-canvas/25 pt-4 md:grid-cols-[1fr_auto]">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[10px] font-bold uppercase tracking-label">
-            <Link
-              href="/"
-              className="transition-colors hover:text-signal"
-            >
-              Baktash Wahidy
-            </Link>
-
-            <Link
-              href="/imkon"
-              className="inline-flex items-center gap-1 text-canvas/65 transition-colors hover:text-signal"
-            >
-              IMKON
-              <ArrowUpRight size={11} />
-            </Link>
-
-            <Link
-              href="/shop"
-              className="inline-flex items-center gap-1 text-canvas/65 transition-colors hover:text-signal"
-            >
-              IMKON Shop
-              <ArrowUpRight size={11} />
-            </Link>
-          </div>
-
-          <div className="flex flex-wrap gap-x-5 gap-y-3 text-[10px] font-bold uppercase tracking-label text-canvas/65">
-            {siteConfig.socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noreferrer"
-                className="transition-colors hover:text-signal"
-              >
-                {social.label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-16 flex flex-col justify-between gap-4 sm:mt-24 sm:flex-row sm:items-end">
-          <p className="text-[clamp(2.8rem,8vw,7rem)] font-bold leading-none tracking-display">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <p className="text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[0.88] tracking-[-0.065em]">
             Baktash Wahidy
             <span className="text-signal">.</span>
           </p>
 
-          <p className="eyebrow text-canvas/55">
-            © {new Date().getFullYear()} Baktash · Brand identity & social design
+          <p className="eyebrow text-canvas/45 sm:pb-1">
+            © {new Date().getFullYear()} Baktash Wahidy · Brand identity & social media designer. All rights reserved.
           </p>
         </div>
       </div>
