@@ -125,22 +125,24 @@ export function ClientFeedbackSection() {
   return (
     <section
       id="client-feedback"
-      className="scroll-mt-20 overflow-hidden bg-canvas pb-[clamp(4.5rem,5vw,5rem)] pt-[clamp(5.5rem,11vw,9rem)]"
+      className="scroll-mt-20 overflow-hidden bg-canvas pb-[clamp(5rem,9vw,9rem)] pt-[clamp(4rem,7vw,7rem)]"
     >
       <div className="page-shell">
-        <div className="grid gap-8 border-t border-ink/20 pt-4 sm:grid-cols-[minmax(8rem,1fr)_minmax(0,3fr)] sm:gap-8">
-          <p className="eyebrow">
-            04 / Client feedback
-          </p>
-
+        <div>
           <Reveal>
-            <h2 className="heading-xl max-w-3xl">
+            <h2 className="whitespace-nowrap text-[clamp(2.75rem,4.5vw,4.75rem)] font-bold leading-[0.94] tracking-[-0.065em]">
               What clients say about working together.
             </h2>
           </Reveal>
+
+          <Reveal delay={0.08} className="mt-5 sm:mt-6">
+            <p className="whitespace-nowrap text-[13px] leading-[1.5] text-quiet sm:text-[14px]">
+              A selection of feedback from clients I&apos;ve worked with across branding, social media, and visual design.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="relative mt-14 overflow-hidden sm:mt-20">
+        <div className="relative mt-10 overflow-hidden sm:mt-14 lg:mt-16">
           <div
             ref={trackRef}
             className={`flex w-max select-none gap-5 touch-pan-y ${
