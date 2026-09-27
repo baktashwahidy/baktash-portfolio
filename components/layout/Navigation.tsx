@@ -49,16 +49,40 @@ export function Navigation() {
   };
 
   const sectionLinks = [
-    { label: "Home", href: "#top" },
-    { label: "About", href: "#about" },
-    { label: "Work", href: "#work" },
-    { label: "Experience", href: "#experience" },
-    { label: "Testimonials", href: "#client-feedback" },
-    { label: "Contact", href: "#contact" },
-  ];
+    {
+      label: "Home",
+      href: "#top",
+      ecosystem: false,
+    },
+    {
+      label: "About",
+      href: "#about",
+      ecosystem: false,
+    },
+    {
+      label: "Work",
+      href: "#work",
+      ecosystem: false,
+    },
+    {
+      label: "Experience",
+      href: "#experience",
+      ecosystem: false,
+    },
+    {
+      label: "Testimonials",
+      href: "#client-feedback",
+      ecosystem: false,
+    },
+    {
+      label: "Contact",
+      href: "#contact",
+      ecosystem: false,
+    },
+  ] as const;
 
   const ecosystemLinks = siteConfig.nav.filter(
-    (item) => item.ecosystem,
+    (item) => item.ecosystem === true,
   );
 
   const menuItems = [...sectionLinks, ...ecosystemLinks];
@@ -192,7 +216,9 @@ export function Navigation() {
 
                         <ArrowUpRight
                           aria-hidden
-                          className={getArrowColor(item.label)}
+                          className={getArrowColor(
+                            item.label,
+                          )}
                           size={24}
                           strokeWidth={1.3}
                         />
@@ -208,7 +234,9 @@ export function Navigation() {
                         {item.ecosystem ? (
                           <ArrowUpRight
                             aria-hidden
-                            className={getArrowColor(item.label)}
+                            className={getArrowColor(
+                              item.label,
+                            )}
                             size={24}
                             strokeWidth={1.3}
                           />
