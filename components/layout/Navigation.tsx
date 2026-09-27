@@ -38,6 +38,21 @@ export function Navigation() {
     setIsOpen(false);
   };
 
+  const sectionLinks = [
+    { label: "Home", href: "#top" },
+    { label: "About", href: "#about" },
+    { label: "Work", href: "#work" },
+    { label: "Experience", href: "#experience" },
+    { label: "Testimonials", href: "#client-feedback" },
+    { label: "Contact", href: "#contact" },
+  ];
+
+  const ecosystemLinks = siteConfig.nav.filter(
+    (item) => item.ecosystem || item.label === "Hire me",
+  );
+
+  const menuItems = [...sectionLinks, ...ecosystemLinks];
+
   const getArrowColor = (label: string) => {
     if (label === "Academy") {
       return "text-cobalt";
@@ -130,7 +145,7 @@ export function Navigation() {
                 aria-label="Main navigation"
                 className="flex flex-col"
               >
-                {siteConfig.nav.map((item, index) => (
+                {menuItems.map((item, index) => (
                   <motion.div
                     key={item.label}
                     initial={
