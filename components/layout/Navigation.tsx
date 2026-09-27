@@ -1,7 +1,15 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from "framer-motion";
+import {
+  ArrowUpRight,
+  Menu,
+  X,
+} from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -19,7 +27,9 @@ export function Navigation() {
 
     updateHeader();
 
-    window.addEventListener("scroll", updateHeader, { passive: true });
+    window.addEventListener("scroll", updateHeader, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", updateHeader);
@@ -48,7 +58,7 @@ export function Navigation() {
   ];
 
   const ecosystemLinks = siteConfig.nav.filter(
-    (item) => item.ecosystem || item.label === "Hire me",
+    (item) => item.ecosystem,
   );
 
   const menuItems = [...sectionLinks, ...ecosystemLinks];
@@ -72,7 +82,9 @@ export function Navigation() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        isScrolled || isOpen ? "bg-canvas" : "bg-transparent"
+        isScrolled || isOpen
+          ? "bg-canvas"
+          : "bg-transparent"
       }`}
     >
       {/* Header */}
@@ -83,7 +95,8 @@ export function Navigation() {
           onClick={closeMenu}
           className="relative z-[80] text-[15px] font-bold uppercase tracking-[-0.06em]"
         >
-          Baktash<span className="text-cobalt">.</span>
+          Baktash
+          <span className="text-cobalt">.</span>
         </Link>
 
         {/* Menu Button */}
@@ -145,68 +158,77 @@ export function Navigation() {
                 aria-label="Main navigation"
                 className="flex flex-col"
               >
-                {menuItems.map((item, index) => (
-                  <motion.div
-                    key={item.label}
-                    initial={
-                      reduceMotion
-                        ? false
-                        : {
-                            opacity: 0,
-                            x: -15,
-                          }
-                    }
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                    }}
-                    transition={{
-                      delay: reduceMotion
-                        ? 0
-                        : 0.08 + index * 0.045,
-                      duration: 0.5,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    {item.label === "Hire me" ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={closeMenu}
-                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
-                      >
-                        {item.label}
+                {menuItems.map((item, index) => {
+                  const isHireMe =
+                    String(item.label) === "Hire me";
 
-                        <ArrowUpRight
-                          aria-hidden
-                          className={getArrowColor(item.label)}
-                          size={24}
-                          strokeWidth={1.3}
-                        />
-                      </a>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        onClick={closeMenu}
-                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
-                      >
-                        {item.label}
+                  return (
+                    <motion.div
+                      key={`${item.label}-${index}`}
+                      initial={
+                        reduceMotion
+                          ? false
+                          : {
+                              opacity: 0,
+                              x: -15,
+                            }
+                      }
+                      animate={{
+                        opacity: 1,
+                        x: 0,
+                      }}
+                      transition={{
+                        delay: reduceMotion
+                          ? 0
+                          : 0.08 + index * 0.045,
+                        duration: 0.5,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      {isHireMe ? (
+                        <a
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={closeMenu}
+                          className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
+                        >
+                          {item.label}
 
-                        {item.ecosystem ? (
                           <ArrowUpRight
                             aria-hidden
-                            className={getArrowColor(item.label)}
+                            className={getArrowColor(
+                              String(item.label),
+                            )}
                             size={24}
                             strokeWidth={1.3}
                           />
-                        ) : (
-                          <span className="h-6 w-6" />
-                        )}
-                      </Link>
-                    )}
-                  </motion.div>
-                ))}
+                        </a>
+                      ) : (
+                        <Link
+                          href={item.href}
+                          onClick={closeMenu}
+                          className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
+                        >
+                          {item.label}
+
+                          {item.ecosystem ? (
+                            <ArrowUpRight
+                              aria-hidden
+                              className={getArrowColor(
+                                String(item.label),
+                              )}
+                              size={24}
+                              strokeWidth={1.3}
+                            />
+                          ) : (
+                            <span className="h-6 w-6" />
+                          )}
+                        </Link>
+                      )}
+                    </motion.div>
+                  );
+                })}
               </nav>
 
               <div className="mt-auto flex items-end justify-between gap-6 pt-8">
