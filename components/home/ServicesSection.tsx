@@ -11,7 +11,7 @@ export function ServicesSection() {
       className="scroll-mt-20 pt-[clamp(5.5rem,11vw,9rem)] pb-[clamp(1.5rem,2vw,2.5rem)]"
     >
       <div className="page-shell">
-        <SectionHeading index="03" label="Services">
+        <SectionHeading>
           <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-end">
             <h2 className="heading-xl">
               Built for the whole brand, not just the first impression.
@@ -32,8 +32,6 @@ export function ServicesSection() {
                 open={index === 0}
               >
                 <summary className="grid cursor-pointer list-none grid-cols-[2.5rem_1fr_auto] gap-3 py-5 sm:grid-cols-[5.5rem_1fr_auto] sm:py-7">
-                  <span className="eyebrow pt-1">{group.number}</span>
-
                   <span className="text-[clamp(1.65rem,3vw,3.3rem)] font-bold leading-none tracking-display">
                     {group.title}
                   </span>
