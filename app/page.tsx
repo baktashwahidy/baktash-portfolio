@@ -4,7 +4,6 @@ import { AboutSection } from "@/components/home/AboutSection";
 import { ClientFeedbackSection } from "@/components/home/ClientFeedbackSection";
 import { ContactSection } from "@/components/home/ContactSection";
 import { Hero } from "@/components/home/Hero";
-import { ServicesSection } from "@/components/home/ServicesSection";
 import { WorkSection } from "@/components/home/WorkSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -44,15 +43,9 @@ export default function Home() {
       <JsonLd data={homepageSchema} />
 
       <Hero />
-
       <AboutSection />
-
       <WorkSection />
-
-      <ServicesSection />
-
       <ClientFeedbackSection />
-
       <ContactSection />
     </>
   );
