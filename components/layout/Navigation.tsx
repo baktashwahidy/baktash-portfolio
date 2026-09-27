@@ -123,7 +123,8 @@ export function Navigation() {
               duration: 0.42,
               ease: [0.16, 1, 0.3, 1],
             }}
-className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscroll-contain bg-canvas px-5 pb-8 pt-2 sm:top-[80px] sm:px-8 sm:pt-2 lg:top-[84px] lg:pt-2"          >
+            className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscroll-contain bg-canvas px-5 pb-8 pt-2 sm:top-[80px] sm:px-8 sm:pt-2 lg:top-[84px] lg:pt-2"
+          >
             <div className="flex min-h-full w-full flex-col">
               <nav
                 aria-label="Main navigation"
@@ -158,14 +159,14 @@ className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscr
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={closeMenu}
-                        className="flex items-center justify-between border-b border-ink/20 py-4 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
+                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
                       >
                         {item.label}
 
                         <ArrowUpRight
                           aria-hidden
                           className={getArrowColor(item.label)}
-                          size={27}
+                          size={24}
                           strokeWidth={1.3}
                         />
                       </a>
@@ -173,7 +174,7 @@ className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscr
                       <Link
                         href={item.href}
                         onClick={closeMenu}
-                        className="flex items-center justify-between border-b border-ink/20 py-4 text-[clamp(2.25rem,10vw,4rem)] font-bold tracking-display"
+                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
                       >
                         {item.label}
 
@@ -181,11 +182,11 @@ className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscr
                           <ArrowUpRight
                             aria-hidden
                             className={getArrowColor(item.label)}
-                            size={27}
+                            size={24}
                             strokeWidth={1.3}
                           />
                         ) : (
-                          <span className="h-[27px] w-[27px]" />
+                          <span className="h-6 w-6" />
                         )}
                       </Link>
                     )}
@@ -193,7 +194,7 @@ className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscr
                 ))}
               </nav>
 
-              <div className="mt-auto flex items-end justify-between gap-6 pt-10">
+              <div className="mt-auto flex items-end justify-between gap-6 pt-8">
                 <p className="eyebrow max-w-36 leading-relaxed">
                   Independent design practice
                   <br />
