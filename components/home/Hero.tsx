@@ -1,19 +1,23 @@
 "use client";
 
-import { ArrowDown, Plus } from "lucide-react";
-import Link from "next/link";
 import { gsap } from "gsap";
 import { useEffect, useRef } from "react";
 
 import { HeroPattern } from "@/components/home/HeroPattern";
-import { MagneticLink } from "@/components/ui/MagneticLink";
+import { TrustedBySection } from "@/components/home/TrustedBySection";
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const hero = heroRef.current;
-    if (!hero || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    if (
+      !hero ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return;
+    }
 
     const context = gsap.context(() => {
       gsap.from("[data-hero-reveal]", {
@@ -23,6 +27,7 @@ export function Hero() {
         delay: 0.16,
         ease: "power4.out",
       });
+
       gsap.from("[data-hero-fade]", {
         opacity: 0,
         y: 15,
@@ -32,14 +37,23 @@ export function Hero() {
         ease: "power3.out",
       });
 
-      const parallaxItems = gsap.utils.toArray<HTMLElement>("[data-parallax]");
+      const parallaxItems =
+        gsap.utils.toArray<HTMLElement>("[data-parallax]");
+
       const onMove = (event: MouseEvent) => {
         if (!window.matchMedia("(pointer: fine)").matches) return;
+
         const bounds = hero.getBoundingClientRect();
-        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+        const x =
+          (event.clientX - bounds.left) / bounds.width - 0.5;
+
+        const y =
+          (event.clientY - bounds.top) / bounds.height - 0.5;
+
         parallaxItems.forEach((item) => {
           const depth = Number(item.dataset.parallax ?? 1);
+
           gsap.to(item, {
             x: x * depth * 30,
             y: y * depth * 30,
@@ -51,54 +65,108 @@ export function Hero() {
       };
 
       hero.addEventListener("mousemove", onMove);
-      return () => hero.removeEventListener("mousemove", onMove);
+
+      return () => {
+        hero.removeEventListener("mousemove", onMove);
+      };
     }, hero);
 
     return () => context.revert();
   }, []);
 
   return (
-    <section ref={heroRef} id="top" className="relative isolate flex min-h-[760px] overflow-hidden pb-8 pt-28 sm:min-h-[840px] sm:pb-10 sm:pt-36 lg:min-h-screen lg:pt-40">
+    <section
+      ref={heroRef}
+      id="top"
+      className="relative isolate flex min-h-[760px] overflow-hidden pb-8 pt-28 sm:min-h-[840px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
+    >
       <HeroPattern containerRef={heroRef} />
-      <div aria-hidden data-parallax="0.55" className="absolute -right-10 top-[20%] z-[1] h-24 w-24 rounded-full border border-ink/50 sm:right-[16%] sm:h-36 sm:w-36" />
-      <div aria-hidden data-parallax="1.35" className="absolute right-[8%] top-[40%] z-[1] hidden h-4 w-4 bg-ember sm:block" />
-      <div aria-hidden data-parallax="0.85" className="absolute bottom-[16%] left-[7%] z-[1] hidden h-16 w-16 rotate-45 border border-cobalt sm:block" />
-      <div aria-hidden data-parallax="1.4" className="absolute bottom-[28%] right-[20%] z-[1] hidden text-[13px] font-bold tracking-[0.2em] text-cobalt lg:block">+</div>
+
+      {/* Orange square */}
+      <div
+        aria-hidden
+        data-parallax="1.35"
+        className="absolute right-[8%] top-[30%] z-[1] hidden h-4 w-4 bg-ember sm:block"
+      />
+
+      {/* Blue plus */}
+      <div
+        aria-hidden
+        data-parallax="1.4"
+        className="absolute bottom-[34%] right-[20%] z-[1] hidden text-[17px] font-bold leading-none tracking-[0.2em] text-cobalt lg:block"
+      >
+        +
+      </div>
+
+      {/* Blue diamond */}
+      <div
+        aria-hidden
+        data-parallax="0.85"
+        className="absolute bottom-[16%] left-[7%] z-[1] hidden h-16 w-16 rotate-45 border border-cobalt sm:block"
+      />
 
       <div className="page-shell relative z-10 flex w-full flex-col">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-          <p data-hero-fade className="eyebrow max-w-48 leading-[1.55]">
-            Baktash Wahidy<br />Independent designer<br />Dubai · Working worldwide
-          </p>
-          <p data-hero-fade className="eyebrow self-start leading-[1.55] lg:justify-self-end lg:text-right">
-            Brand identity · Social design<br />Arabic × English brands
+        {/* Top information */}
+        <div className="grid grid-cols-1">
+          <p
+            data-hero-fade
+            className="eyebrow max-w-48 leading-[1.55]"
+          >
+            Baktash Wahidy
+            <br />
+            Independent designer
+            <br />
+            Dubai · Working worldwide
           </p>
         </div>
 
-        <div className="relative z-10 mt-auto pt-20 sm:pt-28">
-          <h1 aria-label="Baktash" className="display-xl relative z-10">
-            <span className="block overflow-hidden pb-[0.13em]"><span data-hero-reveal className="block">BAK</span></span>
-            <span className="block overflow-hidden pb-[0.13em]"><span data-hero-reveal className="block pl-[0.23em]">TASH<span className="text-cobalt">.</span></span></span>
-          </h1>
+        {/* Main heading */}
+        <div className="relative z-10 mt-8 pt-0 sm:mt-10 lg:mt-12">
+          <h1
+            aria-label="Baktash"
+            className="display-xl relative z-10"
+          >
+            {/* BAK */}
+            <span className="block overflow-hidden pb-[0.13em]">
+              <span
+                data-hero-reveal
+                className="block"
+              >
+                BAK
+              </span>
+            </span>
 
-          <div data-parallax="0.4" className="absolute -right-1 top-[13%] hidden w-[28%] max-w-[330px] border border-ink bg-signal p-4 sm:block lg:right-[8%] lg:top-[3%] lg:p-5">
-            <div className="flex items-start justify-between">
-              <span className="eyebrow text-ink">01 / Identity</span>
-              <Plus aria-hidden size={15} />
+            {/* TASH + description */}
+            <div className="relative block pb-[0.13em]">
+              <span className="relative inline-block pl-[0.23em]">
+                {/* TASH */}
+                <span className="block overflow-hidden pb-[0.12em]">
+                  <span
+                    data-hero-reveal
+                    className="block"
+                  >
+                    TASH
+                    <span className="text-cobalt">.</span>
+                  </span>
+                </span>
+
+                {/* Description beside blue square */}
+                <span
+                  data-hero-fade
+                  className="absolute bottom-[0.8em] left-[calc(100%+2rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
+                >
+                  Brand identity & Social media designer
+                  <br />
+                  Arabic & English brands
+                </span>
+              </span>
             </div>
-            <p className="mt-8 text-[clamp(1rem,2vw,1.85rem)] font-bold leading-[0.95] tracking-display sm:mt-14"></p>
-          </div>
+          </h1>
         </div>
 
-        <div className="mt-10 grid gap-10 border-t border-ink/25 pt-4 sm:mt-14 sm:grid-cols-[1fr_auto] sm:items-end lg:grid-cols-[1.1fr_1fr_auto]">
-          <p data-hero-fade className="body-lg max-w-xl">I build distinctive brand identities and visual systems for Arabic and English brands.</p>
-          <div data-hero-fade className="flex flex-wrap gap-x-7 gap-y-4 sm:justify-self-end">
-            <MagneticLink href="#work">View selected work</MagneticLink>
-            <MagneticLink href="#contact">Work with me</MagneticLink>
-          </div>
-          <Link data-hero-fade href="#work" aria-label="Scroll to selected work" className="hidden h-10 w-10 place-items-center border border-ink/30 transition-colors hover:bg-ink hover:text-canvas lg:grid">
-            <ArrowDown aria-hidden size={16} />
-          </Link>
+        {/* Trusted companies */}
+        <div className="mt-10 border-t border-ink/25 pt-8 sm:mt-14 sm:pt-10">
+          <TrustedBySection />
         </div>
       </div>
     </section>
