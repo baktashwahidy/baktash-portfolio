@@ -158,7 +158,7 @@ className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscr
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={closeMenu}
-                        className="flex items-center justify-between border-b border-ink/20 py-4 text-[clamp(2.25rem,10vw,4rem)] font-bold tracking-display"
+                        className="flex items-center justify-between border-b border-ink/20 py-4 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
                       >
                         {item.label}
 
