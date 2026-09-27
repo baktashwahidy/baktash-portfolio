@@ -95,8 +95,7 @@ export function Navigation() {
           onClick={closeMenu}
           className="relative z-[80] text-[15px] font-bold uppercase tracking-[-0.06em]"
         >
-          Baktash
-          <span className="text-cobalt">.</span>
+          Baktash<span className="text-cobalt">.</span>
         </Link>
 
         {/* Menu Button */}
@@ -158,77 +157,68 @@ export function Navigation() {
                 aria-label="Main navigation"
                 className="flex flex-col"
               >
-                {menuItems.map((item, index) => {
-                  const isHireMe =
-                    String(item.label) === "Hire me";
+                {menuItems.map((item, index) => (
+                  <motion.div
+                    key={`${item.label}-${index}`}
+                    initial={
+                      reduceMotion
+                        ? false
+                        : {
+                            opacity: 0,
+                            x: -15,
+                          }
+                    }
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    transition={{
+                      delay: reduceMotion
+                        ? 0
+                        : 0.08 + index * 0.045,
+                      duration: 0.5,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                  >
+                    {item.label === "Hire me" ? (
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={closeMenu}
+                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
+                      >
+                        {item.label}
 
-                  return (
-                    <motion.div
-                      key={`${item.label}-${index}`}
-                      initial={
-                        reduceMotion
-                          ? false
-                          : {
-                              opacity: 0,
-                              x: -15,
-                            }
-                      }
-                      animate={{
-                        opacity: 1,
-                        x: 0,
-                      }}
-                      transition={{
-                        delay: reduceMotion
-                          ? 0
-                          : 0.08 + index * 0.045,
-                        duration: 0.5,
-                        ease: [0.16, 1, 0.3, 1],
-                      }}
-                    >
-                      {isHireMe ? (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={closeMenu}
-                          className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
-                        >
-                          {item.label}
+                        <ArrowUpRight
+                          aria-hidden
+                          className={getArrowColor(item.label)}
+                          size={24}
+                          strokeWidth={1.3}
+                        />
+                      </a>
+                    ) : (
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
+                      >
+                        {item.label}
 
+                        {item.ecosystem ? (
                           <ArrowUpRight
                             aria-hidden
-                            className={getArrowColor(
-                              String(item.label),
-                            )}
+                            className={getArrowColor(item.label)}
                             size={24}
                             strokeWidth={1.3}
                           />
-                        </a>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          onClick={closeMenu}
-                          className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
-                        >
-                          {item.label}
-
-                          {item.ecosystem ? (
-                            <ArrowUpRight
-                              aria-hidden
-                              className={getArrowColor(
-                                String(item.label),
-                              )}
-                              size={24}
-                              strokeWidth={1.3}
-                            />
-                          ) : (
-                            <span className="h-6 w-6" />
-                          )}
-                        </Link>
-                      )}
-                    </motion.div>
-                  );
-                })}
+                        ) : (
+                          <span className="h-6 w-6" />
+                        )}
+                      </Link>
+                    )}
+                  </motion.div>
+                ))}
               </nav>
 
               <div className="mt-auto flex items-end justify-between gap-6 pt-8">
