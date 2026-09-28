@@ -43,7 +43,7 @@ export function WorkSection() {
         <div className="pt-0">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <h2 className="max-w-none text-[clamp(2.6rem,5vw,5.2rem)] font-bold leading-[0.92] tracking-[-0.065em] whitespace-nowrap sm:text-[clamp(3.2rem,4.6vw,5.2rem)]">
-              Visual systems made to be recognised.
+              Selected work.
             </h2>
           </div>
         </div>
