@@ -21,6 +21,7 @@ export function ClientFeedbackSection() {
   const positionStartRef = useRef(0);
 
   const [isDragging, setIsDragging] = useState(false);
+  const isHoveredRef = useRef(false);
 
   const loopedFeedback = [...clientFeedback, ...clientFeedback];
 
@@ -36,7 +37,7 @@ export function ClientFeedbackSection() {
       const delta = time - lastTimeRef.current;
       lastTimeRef.current = time;
 
-      if (!isDraggingRef.current) {
+      if (!isDraggingRef.current && !isHoveredRef.current) {
         positionRef.current += delta * AUTO_SPEED;
 
         const loopWidth = track.scrollWidth / 2;
@@ -54,7 +55,7 @@ export function ClientFeedbackSection() {
     animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (animationFrameRef.current) {
+      if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
@@ -125,31 +126,67 @@ export function ClientFeedbackSection() {
   return (
     <section
       id="client-feedback"
-      className="scroll-mt-20 overflow-hidden bg-canvas pb-[clamp(5rem,9vw,9rem)] pt-[clamp(4rem,7vw,7rem)]"
+      className="scroll-mt-20 overflow-hidden bg-canvas pb-[clamp(4.5rem,8vw,8rem)] pt-[clamp(4rem,7vw,7rem)]"
     >
-      <div className="page-shell">
-        <div>
+      <div className="page-shell min-w-0">
+        {/* Heading */}
+        <div className="min-w-0 border-t border-ink/20 pt-4">
           <Reveal>
-            <h2 className="whitespace-nowrap text-[clamp(2.75rem,4.5vw,4.75rem)] font-bold leading-[0.94] tracking-[-0.065em]">
+            <h2
+              className="
+                min-w-0
+                max-w-full
+                break-words
+                text-[clamp(2.3rem,9.5vw,4.75rem)]
+                font-bold
+                leading-[0.94]
+                tracking-[-0.065em]
+              "
+            >
               What clients say about working together.
             </h2>
           </Reveal>
 
-          <Reveal delay={0.08} className="mt-5 sm:mt-6">
-            <p className="whitespace-nowrap text-[13px] leading-[1.5] text-quiet sm:text-[14px]">
-              A selection of feedback from clients I&apos;ve worked with across branding, social media, and visual design.
+          <Reveal
+            delay={0.08}
+            className="mt-4 min-w-0 sm:mt-5"
+          >
+            <p
+              className="
+                max-w-full
+                break-words
+                text-[13px]
+                leading-[1.5]
+                text-quiet
+                sm:text-[14px]
+              "
+            >
+              A selection of feedback from clients I&apos;ve worked with
+              across branding, social media, and visual design.
             </p>
           </Reveal>
         </div>
 
-        <div className="relative mt-10 overflow-hidden sm:mt-14 lg:mt-16">
+        {/* Feedback carousel */}
+        <div
+          className="relative mt-8 min-w-0 overflow-hidden sm:mt-14 lg:mt-16"
+          onMouseEnter={() => {
+            isHoveredRef.current = true;
+          }}
+          onMouseLeave={() => {
+            isHoveredRef.current = false;
+          }}
+        >
           <div
             ref={trackRef}
-            className={`flex w-max select-none gap-5 touch-pan-y ${
-              isDragging ? "cursor-grabbing" : "cursor-grab"
+            className={`flex w-max select-none gap-4 touch-pan-y sm:gap-5 ${
+              isDragging
+                ? "cursor-grabbing"
+                : "cursor-grab"
             }`}
             style={{
               transform: "translate3d(0, 0, 0)",
+              willChange: "transform",
             }}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
@@ -159,7 +196,7 @@ export function ClientFeedbackSection() {
             {loopedFeedback.map((item, index) => (
               <article
                 key={`${item.platform}-${item.client}-${index}`}
-                className="w-[280px] shrink-0 sm:w-[330px] lg:w-[360px]"
+                className="w-[260px] shrink-0 sm:w-[330px] lg:w-[360px]"
               >
                 <div className="relative aspect-[18/10] overflow-hidden rounded-[18px] bg-ink/5">
                   <Image
