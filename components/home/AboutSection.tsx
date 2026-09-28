@@ -195,7 +195,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-20 bg-[#dedbd2] py-[clamp(5rem,9vw,8.5rem)]"
+      className="scroll-mt-20 bg-[#dedbd2] pb-[clamp(5rem,9vw,8.5rem)] pt-[clamp(2.5rem,4vw,4.5rem)]"
     >
       <div className="page-shell">
         <SectionHeading
@@ -219,7 +219,7 @@ export function AboutSection() {
           </Reveal>
         </SectionHeading>
 
-        <div className="mt-10 grid gap-10 sm:mt-14 lg:mt-16 lg:grid-cols-12 lg:items-start lg:gap-10">
+        <div className="mt-4 grid gap-10 sm:mt-8 lg:mt-10 lg:grid-cols-12 lg:items-start lg:gap-10">
           {/* Portrait */}
           <Reveal className="lg:col-span-7">
             <div className="relative aspect-[6/5] overflow-hidden bg-ink/5">
