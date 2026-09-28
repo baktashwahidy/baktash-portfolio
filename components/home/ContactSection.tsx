@@ -70,7 +70,7 @@ export function ContactSection() {
               href="/imkon"
               className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-canvas/75 transition-colors hover:text-signal"
             >
-              IMKON
+              WE ARE IMKON
 
               <ArrowUpRight
                 aria-hidden
