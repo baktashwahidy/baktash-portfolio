@@ -1,15 +1,12 @@
 export const projectCategories = [
-  "Brand Identity",
-  "Logo Design",
-  "Visual Identity",
-  "Social Media Branding",
-  "Packaging",
+  "Branding",
+  "Social Media",
   "Pitch Deck",
-  "Marketing Design",
-  "Arabic & English Branding",
+  "Print",
 ] as const;
 
-export type ProjectCategory = (typeof projectCategories)[number];
+export type ProjectCategory =
+  (typeof projectCategories)[number];
 
 export type ProjectImage = {
   src: string;
@@ -40,129 +37,649 @@ export type Project = {
   };
 };
 
+type ProjectInput = {
+  slug: string;
+  title: string;
+  category: ProjectCategory;
+  client: string;
+  year: string;
+  shortDescription: string;
+  sector: string;
+  scope: string;
+  languages: string;
+  images: string[];
+  services: string[];
+  tools: string[];
+};
+
+function createProject(
+  input: ProjectInput,
+): Project {
+  const imageObjects = input.images.map(
+    (src, index) => ({
+      src,
+      alt: `${input.title} ${
+        index === 0
+          ? "project cover"
+          : `project image ${index + 1}`
+      }`,
+    }),
+  );
+
+  return {
+    slug: input.slug,
+    title: input.title,
+    category: input.category,
+    client: input.client,
+    year: input.year,
+    shortDescription:
+      input.shortDescription,
+
+    coverImage:
+      imageObjects[0],
+
+    images: imageObjects,
+
+    services: input.services,
+
+    tools: input.tools,
+
+    details: {
+      sector: input.sector,
+      scope: input.scope,
+      languages: input.languages,
+    },
+
+    caseStudy: {
+      overview:
+        input.shortDescription,
+
+      challenge:
+        `Create a clear and recognisable visual system for ${input.client}.`,
+
+      approach:
+        `The project combines ${input.services
+          .slice(0, 3)
+          .join(", ")} into one consistent visual direction.`,
+
+      outcome:
+        `A flexible ${input.category.toLowerCase()} system designed to work consistently across the brand's key touchpoints.`,
+    },
+  };
+}
+
 export const projects: Project[] = [
-  {
-    slug: "meridian-house",
-    title: "Meridian House",
-    category: "Brand Identity",
-    client: "Meridian House",
+  // =========================================================
+  // BRANDING — 01
+  // =========================================================
+
+  createProject({
+    slug: "zeva",
+    title: "ZEVA",
+    category: "Branding",
+    client: "ZEVA",
+    year: "2026",
+    shortDescription:
+      "A distinctive brand identity system built around a refined visual language, premium packaging and consistent brand applications.",
+    sector: "Lifestyle",
+    scope: "Complete brand identity",
+    languages: "English",
+    images: [
+      "/images/projects/zeva/01-cover.jpg",
+      "/images/projects/zeva/02-logo.jpg",
+      "/images/projects/zeva/03-brand-system.jpg",
+      "/images/projects/zeva/04-stationery.jpg",
+      "/images/projects/zeva/05-packaging.jpg",
+      "/images/projects/zeva/06-social.jpg",
+      "/images/projects/zeva/07-detail.jpg",
+    ],
+    services: [
+      "Brand Identity",
+      "Logo Design",
+      "Visual Identity",
+      "Packaging Design",
+      "Social Media Branding",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Adobe InDesign",
+      "Figma",
+    ],
+  }),
+
+  // BRANDING — 02
+
+  createProject({
+    slug: "noura",
+    title: "Noura",
+    category: "Branding",
+    client: "Noura",
+    year: "2026",
+    shortDescription:
+      "A bilingual Arabic and English identity designed for a modern brand with a refined and approachable character.",
+    sector: "Beauty & Lifestyle",
+    scope: "Bilingual identity",
+    languages: "Arabic · English",
+    images: [
+      "/images/projects/noura/01-cover.jpg",
+      "/images/projects/noura/02-logo.jpg",
+      "/images/projects/noura/03-arabic-english.jpg",
+      "/images/projects/noura/04-colour.jpg",
+      "/images/projects/noura/05-stationery.jpg",
+      "/images/projects/noura/06-packaging.jpg",
+    ],
+    services: [
+      "Arabic Branding",
+      "English Branding",
+      "Logo Design",
+      "Visual Identity",
+      "Brand Guidelines",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Figma",
+    ],
+  }),
+
+  // BRANDING — 03
+
+  createProject({
+    slug: "growza",
+    title: "Growza",
+    category: "Branding",
+    client: "Growza",
+    year: "2026",
+    shortDescription:
+      "A modern identity system created to give a growing business a clear, energetic and recognisable visual presence.",
+    sector: "Business",
+    scope: "Brand identity system",
+    languages: "English",
+    images: [
+      "/images/projects/growza/01-cover.jpg",
+      "/images/projects/growza/02-logo.jpg",
+      "/images/projects/growza/03-brand-system.jpg",
+      "/images/projects/growza/04-colour.jpg",
+      "/images/projects/growza/05-stationery.jpg",
+      "/images/projects/growza/06-applications.jpg",
+    ],
+    services: [
+      "Brand Strategy",
+      "Brand Identity",
+      "Logo Design",
+      "Visual Identity",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe Photoshop",
+      "Figma",
+    ],
+  }),
+
+  // BRANDING — 04
+
+  createProject({
+    slug: "caliburn",
+    title: "Caliburn",
+    category: "Branding",
+    client: "Caliburn",
     year: "2025",
     shortDescription:
-      "An assured visual identity for a hospitality concept where local ritual meets contemporary living.",
-    coverImage: {
-      src: "/images/projects/meridian-cover.jpg",
-      alt: "Meridian House brand identity composition",
-    },
+      "A sophisticated identity system combining strong typography, distinctive graphics and a controlled premium aesthetic.",
+    sector: "Professional Services",
+    scope: "Visual identity",
+    languages: "English",
     images: [
-      { src: "/images/projects/meridian-cover.jpg", alt: "Meridian House wordmark study" },
-      { src: "/images/projects/meridian-detail.jpg", alt: "Meridian House menu and stationery" },
+      "/images/projects/caliburn/01-cover.jpg",
+      "/images/projects/caliburn/02-logo.jpg",
+      "/images/projects/caliburn/03-typography.jpg",
+      "/images/projects/caliburn/04-colour.jpg",
+      "/images/projects/caliburn/05-stationery.jpg",
+      "/images/projects/caliburn/06-applications.jpg",
+      "/images/projects/caliburn/07-detail.jpg",
     ],
-    services: ["Brand Strategy", "Visual Identity", "Brand Guidelines", "Print Design"],
-    tools: ["Adobe Illustrator", "Adobe InDesign", "Figma"],
-    details: { sector: "Hospitality", scope: "Identity system", languages: "English · Arabic" },
-    caseStudy: {
-      overview:
-        "Meridian House is a destination built around slow hospitality, expressive food and shared rituals. The identity needed to feel polished without losing its warmth.",
-      challenge:
-        "Create a recognisable system that could move naturally from an architectural setting to intimate printed moments, in both English and Arabic.",
-      approach:
-        "We paired an elegant high-contrast wordmark with a modular monogram and a tightly controlled field of colour. Bilingual typography was treated as one composition rather than a translation.",
-      outcome:
-        "The resulting system gives the team a clear, flexible visual language across menus, packaging, social content and environmental touchpoints.",
-    },
-  },
-  {
-    slug: "noura-studio",
-    title: "Noura Studio",
-    category: "Arabic & English Branding",
-    client: "Noura Studio",
+    services: [
+      "Brand Identity",
+      "Logo System",
+      "Visual Identity",
+      "Brand Guidelines",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Figma",
+    ],
+  }),
+
+  // BRANDING — 05
+
+  createProject({
+    slug: "overhaul-branding",
+    title: "Overhaul",
+    category: "Branding",
+    client: "Overhaul",
     year: "2025",
     shortDescription:
-      "A bilingual identity that brings clarity, rhythm and quiet confidence to a modern beauty studio.",
-    coverImage: {
-      src: "/images/projects/noura-cover.jpg",
-      alt: "Noura Studio bilingual identity artwork",
-    },
+      "A confident visual identity built around strong typography, adaptable graphics and a clear brand system.",
+    sector: "Technology",
+    scope: "Brand identity",
+    languages: "English",
     images: [
-      { src: "/images/projects/noura-cover.jpg", alt: "Noura Studio typography" },
-      { src: "/images/projects/noura-detail.jpg", alt: "Noura Studio social layout" },
+      "/images/projects/overhaul-branding/01-cover.jpg",
+      "/images/projects/overhaul-branding/02-logo.jpg",
+      "/images/projects/overhaul-branding/03-typography.jpg",
+      "/images/projects/overhaul-branding/04-colour.jpg",
+      "/images/projects/overhaul-branding/05-stationery.jpg",
+      "/images/projects/overhaul-branding/06-applications.jpg",
     ],
-    services: ["Arabic Branding", "English Branding", "Logo System", "Social Media Branding"],
-    tools: ["Adobe Illustrator", "Adobe Photoshop", "Canva"],
-    details: { sector: "Beauty", scope: "Bilingual launch", languages: "Arabic · English" },
-    caseStudy: {
-      overview:
-        "Noura Studio wanted an identity with the sensitivity of a personal recommendation and the precision of an established editorial brand.",
-      challenge:
-        "The Arabic and English identities had to carry equal weight while remaining adaptable for a fast-moving social content calendar.",
-      approach:
-        "The system uses a generous typographic cadence, a signature warm red and image framing rules that create recognisable rhythm across languages and formats.",
-      outcome:
-        "Noura launched with a cohesive presence that feels considered on a storefront, a story sequence and a small-format appointment card.",
-    },
-  },
-  {
-    slug: "kivo-objects",
-    title: "Kivo Objects",
-    category: "Packaging",
-    client: "Kivo Objects",
-    year: "2024",
+    services: [
+      "Brand Identity",
+      "Logo Design",
+      "Typography",
+      "Visual Identity",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Figma",
+      "Adobe InDesign",
+    ],
+  }),
+
+  // BRANDING — 06
+
+  createProject({
+    slug: "gulf-business-forum",
+    title: "Gulf Business Forum",
+    category: "Branding",
+    client: "Gulf Business Forum",
+    year: "2025",
     shortDescription:
-      "A tactile packaging and visual system for everyday objects made to be kept, shared and collected.",
-    coverImage: {
-      src: "/images/projects/kivo-cover.jpg",
-      alt: "Kivo Objects packaging design artwork",
-    },
+      "A structured visual identity bringing formal communication, typography and branded applications into one system.",
+    sector: "Business",
+    scope: "Corporate identity",
+    languages: "Arabic · English",
     images: [
-      { src: "/images/projects/kivo-cover.jpg", alt: "Kivo Objects package design" },
-      { src: "/images/projects/kivo-detail.jpg", alt: "Kivo Objects colour system" },
+      "/images/projects/gulf-business-forum/01-cover.jpg",
+      "/images/projects/gulf-business-forum/02-logo.jpg",
+      "/images/projects/gulf-business-forum/03-typography.jpg",
+      "/images/projects/gulf-business-forum/04-colour.jpg",
+      "/images/projects/gulf-business-forum/05-stationery.jpg",
+      "/images/projects/gulf-business-forum/06-applications.jpg",
+      "/images/projects/gulf-business-forum/07-detail.jpg",
     ],
-    services: ["Packaging Design", "Visual Identity", "Art Direction", "Print Design"],
-    tools: ["Adobe Illustrator", "Adobe InDesign", "Adobe Photoshop"],
-    details: { sector: "Lifestyle", scope: "Packaging range", languages: "English" },
-    caseStudy: {
-      overview:
-        "Kivo makes useful objects with a playful point of view. The new system needed to make a growing range feel immediately related.",
-      challenge:
-        "Design a compact toolkit that could scale across shapes and sizes without relying on disposable trend language.",
-      approach:
-        "We created a bold wordmark, a coded colour sequence and an oversized graphic device that shifts in crop and scale across each pack.",
-      outcome:
-        "The packaging is confident from a distance and rich in detail up close, giving the range a clear shelf presence and a collectible feel.",
-    },
-  },
-  {
-    slug: "maraq-labs",
-    title: "Maraq Labs",
-    category: "Social Media Branding",
-    client: "Maraq Labs",
-    year: "2024",
+    services: [
+      "Brand Identity",
+      "Logo Design",
+      "Corporate Branding",
+      "Stationery",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Figma",
+    ],
+  }),
+
+  // =========================================================
+  // SOCIAL MEDIA — 07
+  // =========================================================
+
+  createProject({
+    slug: "almskn",
+    title: "Almskn",
+    category: "Social Media",
+    client: "Almskn",
+    year: "2026",
     shortDescription:
-      "A sharp social-first visual language for a food innovation company communicating complex ideas simply.",
-    coverImage: {
-      src: "/images/projects/maraq-cover.jpg",
-      alt: "Maraq Labs social media identity composition",
-    },
+      "A social media design system built to present property, lifestyle and campaign content with consistency.",
+    sector: "Real Estate",
+    scope: "Social media system",
+    languages: "Arabic · English",
     images: [
-      { src: "/images/projects/maraq-cover.jpg", alt: "Maraq Labs campaign direction" },
-      { src: "/images/projects/maraq-detail.jpg", alt: "Maraq Labs content templates" },
+      "/images/projects/almskn/01-cover.jpg",
+      "/images/projects/almskn/02-grid.jpg",
+      "/images/projects/almskn/03-post.jpg",
+      "/images/projects/almskn/04-carousel.jpg",
+      "/images/projects/almskn/05-story.jpg",
+      "/images/projects/almskn/06-campaign.jpg",
     ],
-    services: ["Social Media Branding", "Content Templates", "Marketing Design", "Pitch Deck Design"],
-    tools: ["Figma", "Adobe Photoshop", "Canva"],
-    details: { sector: "Food innovation", scope: "Social launch system", languages: "English · Arabic" },
-    caseStudy: {
-      overview:
-        "Maraq Labs turns research into food experiences. Its audience ranges from curious consumers to potential partners and investors.",
-      challenge:
-        "Build a social system that can explain nuanced ideas while feeling energetic, human and immediately recognisable.",
-      approach:
-        "An adaptable grid, oversized data points and vivid image treatments create a set of rules that any campaign can inhabit.",
-      outcome:
-        "The team gained a practical content kit that brings consistency to organic social, paid campaigns and investor-facing materials.",
-    },
-  },
+    services: [
+      "Social Media Branding",
+      "Instagram Design",
+      "Carousel Design",
+      "Story Design",
+      "Campaign Design",
+    ],
+    tools: [
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Figma",
+    ],
+  }),
+
+  // SOCIAL MEDIA — 08
+
+  createProject({
+    slug: "overhaul-social",
+    title: "Overhaul",
+    category: "Social Media",
+    client: "Overhaul",
+    year: "2025",
+    shortDescription:
+      "A bold social media campaign system designed around strong typography, concise messaging and visual consistency.",
+    sector: "Technology",
+    scope: "Social campaign",
+    languages: "English",
+    images: [
+      "/images/projects/overhaul-social/01-cover.jpg",
+      "/images/projects/overhaul-social/02-grid.jpg",
+      "/images/projects/overhaul-social/03-post.jpg",
+      "/images/projects/overhaul-social/04-carousel.jpg",
+      "/images/projects/overhaul-social/05-story.jpg",
+      "/images/projects/overhaul-social/06-ad.jpg",
+    ],
+    services: [
+      "Social Media Design",
+      "Campaign Design",
+      "Content Templates",
+      "Marketing Design",
+    ],
+    tools: [
+      "Adobe Photoshop",
+      "Figma",
+      "Canva",
+    ],
+  }),
+
+  // SOCIAL MEDIA — 09
+
+  createProject({
+    slug: "maraq",
+    title: "Maraq",
+    category: "Social Media",
+    client: "Maraq",
+    year: "2025",
+    shortDescription:
+      "A social-first visual system combining editorial layouts, campaign graphics and engaging content templates.",
+    sector: "Food & Lifestyle",
+    scope: "Social media identity",
+    languages: "Arabic · English",
+    images: [
+      "/images/projects/maraq/01-cover.jpg",
+      "/images/projects/maraq/02-grid.jpg",
+      "/images/projects/maraq/03-post.jpg",
+      "/images/projects/maraq/04-carousel.jpg",
+      "/images/projects/maraq/05-story.jpg",
+      "/images/projects/maraq/06-campaign.jpg",
+      "/images/projects/maraq/07-detail.jpg",
+    ],
+    services: [
+      "Social Media Branding",
+      "Content Design",
+      "Campaign Design",
+      "Marketing Design",
+    ],
+    tools: [
+      "Adobe Photoshop",
+      "Figma",
+      "Canva",
+    ],
+  }),
+
+  // SOCIAL MEDIA — 10
+
+  createProject({
+    slug: "luxe",
+    title: "LUXE",
+    category: "Social Media",
+    client: "LUXE",
+    year: "2025",
+    shortDescription:
+      "A premium social media campaign designed around refined imagery, typography and product storytelling.",
+    sector: "Luxury",
+    scope: "Social campaign",
+    languages: "English",
+    images: [
+      "/images/projects/luxe/01-cover.jpg",
+      "/images/projects/luxe/02-grid.jpg",
+      "/images/projects/luxe/03-post.jpg",
+      "/images/projects/luxe/04-carousel.jpg",
+      "/images/projects/luxe/05-story.jpg",
+      "/images/projects/luxe/06-campaign.jpg",
+    ],
+    services: [
+      "Social Media Design",
+      "Campaign Design",
+      "Art Direction",
+      "Content Templates",
+    ],
+    tools: [
+      "Adobe Photoshop",
+      "Adobe Illustrator",
+      "Figma",
+    ],
+  }),
+
+  // =========================================================
+  // PITCH DECK — 11 ENGLISH
+  // =========================================================
+
+  createProject({
+    slug: "finora",
+    title: "Finora",
+    category: "Pitch Deck",
+    client: "Finora",
+    year: "2026",
+    shortDescription:
+      "An investor pitch deck designed to communicate a financial technology concept with clarity and confidence.",
+    sector: "FinTech",
+    scope: "Investor pitch deck",
+    languages: "English",
+    images: [
+      "/images/projects/finora/01-cover.jpg",
+      "/images/projects/finora/02-title.jpg",
+      "/images/projects/finora/03-problem.jpg",
+      "/images/projects/finora/04-solution.jpg",
+      "/images/projects/finora/05-market.jpg",
+      "/images/projects/finora/06-business-model.jpg",
+      "/images/projects/finora/07-financials.jpg",
+      "/images/projects/finora/08-closing.jpg",
+    ],
+    services: [
+      "Pitch Deck Design",
+      "Presentation Design",
+      "Data Visualization",
+      "Information Design",
+    ],
+    tools: [
+      "Figma",
+      "Adobe Illustrator",
+      "Adobe InDesign",
+    ],
+  }),
+
+  // PITCH DECK — 12 ENGLISH
+
+  createProject({
+    slug: "nexa-capital",
+    title: "Nexa Capital",
+    category: "Pitch Deck",
+    client: "Nexa Capital",
+    year: "2025",
+    shortDescription:
+      "A clean English investor presentation created to communicate a business opportunity through a structured visual narrative.",
+    sector: "Investment",
+    scope: "Investor presentation",
+    languages: "English",
+    images: [
+      "/images/projects/nexa-capital/01-cover.jpg",
+      "/images/projects/nexa-capital/02-title.jpg",
+      "/images/projects/nexa-capital/03-problem.jpg",
+      "/images/projects/nexa-capital/04-solution.jpg",
+      "/images/projects/nexa-capital/05-market.jpg",
+      "/images/projects/nexa-capital/06-model.jpg",
+      "/images/projects/nexa-capital/07-growth.jpg",
+    ],
+    services: [
+      "Pitch Deck Design",
+      "Information Design",
+      "Data Visualization",
+      "Visual Storytelling",
+    ],
+    tools: [
+      "Figma",
+      "Adobe Illustrator",
+    ],
+  }),
+
+  // PITCH DECK — 13 ARABIC
+
+  createProject({
+    slug: "arabia-ventures",
+    title: "Arabia Ventures",
+    category: "Pitch Deck",
+    client: "Arabia Ventures",
+    year: "2026",
+    shortDescription:
+      "An Arabic investor pitch deck designed with clear hierarchy, RTL structure and strong visual storytelling.",
+    sector: "Investment",
+    scope: "Arabic investor deck",
+    languages: "Arabic",
+    images: [
+      "/images/projects/arabia-ventures/01-cover.jpg",
+      "/images/projects/arabia-ventures/02-title.jpg",
+      "/images/projects/arabia-ventures/03-problem.jpg",
+      "/images/projects/arabia-ventures/04-solution.jpg",
+      "/images/projects/arabia-ventures/05-market.jpg",
+      "/images/projects/arabia-ventures/06-business.jpg",
+      "/images/projects/arabia-ventures/07-financials.jpg",
+      "/images/projects/arabia-ventures/08-closing.jpg",
+    ],
+    services: [
+      "Arabic Pitch Deck",
+      "Presentation Design",
+      "Data Visualization",
+      "Information Design",
+    ],
+    tools: [
+      "Figma",
+      "Adobe Illustrator",
+      "Adobe InDesign",
+    ],
+  }),
+
+  // PITCH DECK — 14 ARABIC
+
+  createProject({
+    slug: "masar-tech",
+    title: "Masar Tech",
+    category: "Pitch Deck",
+    client: "Masar Tech",
+    year: "2025",
+    shortDescription:
+      "An Arabic technology pitch deck translating complex product information into a concise visual story.",
+    sector: "Technology",
+    scope: "Arabic pitch deck",
+    languages: "Arabic",
+    images: [
+      "/images/projects/masar-tech/01-cover.jpg",
+      "/images/projects/masar-tech/02-title.jpg",
+      "/images/projects/masar-tech/03-problem.jpg",
+      "/images/projects/masar-tech/04-solution.jpg",
+      "/images/projects/masar-tech/05-product.jpg",
+      "/images/projects/masar-tech/06-market.jpg",
+      "/images/projects/masar-tech/07-growth.jpg",
+    ],
+    services: [
+      "Arabic Pitch Deck",
+      "Presentation Design",
+      "Visual Storytelling",
+      "Data Visualization",
+    ],
+    tools: [
+      "Figma",
+      "Adobe Illustrator",
+    ],
+  }),
+
+  // =========================================================
+  // PRINT — 15
+  // =========================================================
+
+  createProject({
+    slug: "al-diyarb-al-arabiya",
+    title: "Al Diyarb Al Arabiya",
+    category: "Print",
+    client: "Al Diyarb Al Arabiya",
+    year: "2026",
+    shortDescription:
+      "A print-focused visual system bringing Arabic typography, formal layouts and premium physical applications together.",
+    sector: "Corporate",
+    scope: "Print identity",
+    languages: "Arabic",
+    images: [
+      "/images/projects/al-diyarb-al-arabiya/01-cover.jpg",
+      "/images/projects/al-diyarb-al-arabiya/02-invitation.jpg",
+      "/images/projects/al-diyarb-al-arabiya/03-business-card.jpg",
+      "/images/projects/al-diyarb-al-arabiya/04-brochure.jpg",
+      "/images/projects/al-diyarb-al-arabiya/05-stationery.jpg",
+      "/images/projects/al-diyarb-al-arabiya/06-detail.jpg",
+    ],
+    services: [
+      "Print Design",
+      "Arabic Typography",
+      "Stationery Design",
+      "Invitation Design",
+      "Brochure Design",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Adobe Photoshop",
+    ],
+  }),
+
+  // PRINT — 16
+
+  createProject({
+    slug: "galleria-print",
+    title: "Galleria",
+    category: "Print",
+    client: "Galleria",
+    year: "2025",
+    shortDescription:
+      "A premium print collection combining invitations, stationery and promotional materials into one visual system.",
+    sector: "Lifestyle",
+    scope: "Print collection",
+    languages: "English",
+    images: [
+      "/images/projects/galleria-print/01-cover.jpg",
+      "/images/projects/galleria-print/02-invitation.jpg",
+      "/images/projects/galleria-print/03-business-card.jpg",
+      "/images/projects/galleria-print/04-brochure.jpg",
+      "/images/projects/galleria-print/05-stationery.jpg",
+      "/images/projects/galleria-print/06-packaging.jpg",
+    ],
+    services: [
+      "Print Design",
+      "Invitation Design",
+      "Stationery",
+      "Brochure Design",
+      "Packaging",
+    ],
+    tools: [
+      "Adobe Illustrator",
+      "Adobe InDesign",
+      "Adobe Photoshop",
+    ],
+  }),
 ];
 
-export function getProjectBySlug(slug: string) {
-  return projects.find((project) => project.slug === slug);
+export function getProjectBySlug(
+  slug: string,
+) {
+  return projects.find(
+    (project) => project.slug === slug,
+  );
 }
