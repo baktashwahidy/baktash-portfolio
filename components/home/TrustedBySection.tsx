@@ -5,27 +5,27 @@ import type { PointerEvent as ReactPointerEvent } from "react";
 
 const trustedCompanies = [
   {
-    name: "Company One",
+    name: "PayPal",
     logo: "/logos/companies/company-01.svg",
   },
   {
-    name: "Company Two",
+    name: "Almskn",
     logo: "/logos/companies/company-02.svg",
   },
   {
-    name: "Company Three",
+    name: "Growza",
     logo: "/logos/companies/company-03.svg",
   },
   {
-    name: "Company Four",
+    name: "Caliburn",
     logo: "/logos/companies/company-04.svg",
   },
   {
-    name: "Company Five",
+    name: "Overhaul",
     logo: "/logos/companies/company-05.svg",
   },
   {
-    name: "Company Six",
+    name: "Al Diyarb Al Arabiya",
     logo: "/logos/companies/company-06.svg",
   },
   {
@@ -46,12 +46,11 @@ const trustedCompanies = [
   },
 ];
 
-const AUTO_SPEED = 0.22;
+const AUTO_SPEED = 0.32;
 const DRAG_FACTOR = 0.42;
 
 export function TrustedBySection() {
   const trackRef = useRef<HTMLDivElement>(null);
-
   const animationFrameRef = useRef<number | null>(null);
 
   const positionRef = useRef(0);
@@ -206,7 +205,7 @@ export function TrustedBySection() {
                 width={180}
                 height={44}
                 draggable={false}
-                className="h-7 w-auto max-w-[180px] object-contain opacity-65 transition-opacity duration-300 hover:opacity-100"
+                className="h-7 w-auto max-w-[180px] object-contain opacity-100 transition-transform duration-300 ease-out hover:scale-[1.08] sm:h-8"
               />
             </div>
           ))}
