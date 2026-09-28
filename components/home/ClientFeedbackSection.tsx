@@ -142,7 +142,7 @@ export function ClientFeedbackSection() {
     >
       <div className="page-shell min-w-0">
         {/* Heading */}
-        <div className="min-w-0 border-t border-ink/20 pt-4">
+        <div className="min-w-0 pt-0.5">
           <Reveal>
             <h2
               className="
