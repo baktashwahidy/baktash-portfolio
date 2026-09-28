@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { clientFeedback } from "@/data/feedback";
 
-const AUTO_SPEED = 0.06;
+const AUTO_SPEED = 0.045;
 const DRAG_FACTOR = 0.42;
 
 export function ClientFeedbackSection() {
@@ -21,7 +21,6 @@ export function ClientFeedbackSection() {
   const positionStartRef = useRef(0);
 
   const [isDragging, setIsDragging] = useState(false);
-  const isHoveredRef = useRef(false);
 
   const loopedFeedback = [...clientFeedback, ...clientFeedback];
 
@@ -30,29 +29,39 @@ export function ClientFeedbackSection() {
       const track = trackRef.current;
 
       if (!track) {
-        animationFrameRef.current = requestAnimationFrame(animate);
+        animationFrameRef.current =
+          requestAnimationFrame(animate);
+
         return;
       }
 
       const delta = time - lastTimeRef.current;
       lastTimeRef.current = time;
 
-      if (!isDraggingRef.current && !isHoveredRef.current) {
+      // Continue moving on hover.
+      // Pause only while the user is dragging.
+      if (!isDraggingRef.current) {
         positionRef.current += delta * AUTO_SPEED;
 
         const loopWidth = track.scrollWidth / 2;
 
-        if (loopWidth > 0 && positionRef.current >= loopWidth) {
+        if (
+          loopWidth > 0 &&
+          positionRef.current >= loopWidth
+        ) {
           positionRef.current -= loopWidth;
         }
 
-        track.style.transform = `translate3d(${-positionRef.current}px, 0, 0)`;
+        track.style.transform =
+          `translate3d(${-positionRef.current}px, 0, 0)`;
       }
 
-      animationFrameRef.current = requestAnimationFrame(animate);
+      animationFrameRef.current =
+        requestAnimationFrame(animate);
     };
 
-    animationFrameRef.current = requestAnimationFrame(animate);
+    animationFrameRef.current =
+      requestAnimationFrame(animate);
 
     return () => {
       if (animationFrameRef.current !== null) {
@@ -87,7 +96,8 @@ export function ClientFeedbackSection() {
     if (!track) return;
 
     const movement =
-      (event.clientX - pointerStartRef.current) * DRAG_FACTOR;
+      (event.clientX - pointerStartRef.current) *
+      DRAG_FACTOR;
 
     const loopWidth = track.scrollWidth / 2;
 
@@ -118,7 +128,9 @@ export function ClientFeedbackSection() {
     isDraggingRef.current = false;
     setIsDragging(false);
 
-    if (track?.hasPointerCapture(event.pointerId)) {
+    if (
+      track?.hasPointerCapture(event.pointerId)
+    ) {
       track.releasePointerCapture(event.pointerId);
     }
   };
@@ -161,22 +173,15 @@ export function ClientFeedbackSection() {
                 sm:text-[14px]
               "
             >
-              A selection of feedback from clients I&apos;ve worked with
-              across branding, social media, and visual design.
+              A selection of feedback from clients I&apos;ve
+              worked with across branding, social media, and
+              visual design.
             </p>
           </Reveal>
         </div>
 
         {/* Feedback carousel */}
-        <div
-          className="relative mt-8 min-w-0 overflow-hidden sm:mt-14 lg:mt-16"
-          onMouseEnter={() => {
-            isHoveredRef.current = true;
-          }}
-          onMouseLeave={() => {
-            isHoveredRef.current = false;
-          }}
-        >
+        <div className="relative mt-8 min-w-0 overflow-hidden sm:mt-14 lg:mt-16">
           <div
             ref={trackRef}
             className={`flex w-max select-none gap-4 touch-pan-y sm:gap-5 ${
