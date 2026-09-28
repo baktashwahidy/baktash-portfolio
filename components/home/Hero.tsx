@@ -78,7 +78,7 @@ export function Hero() {
     <section
       ref={heroRef}
       id="top"
-      className="relative isolate flex min-h-[760px] overflow-hidden pb-8 pt-28 sm:min-h-[840px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
+      className="relative isolate flex min-h-[480px] overflow-hidden pb-8 pt-28 sm:min-h-[620px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
     >
       <HeroPattern containerRef={heroRef} />
 
@@ -124,7 +124,7 @@ export function Hero() {
         <div className="relative z-10 mt-8 pt-0 sm:mt-10 lg:mt-12">
           <h1
             aria-label="Baktash"
-            className="display-xl relative z-10"
+            className="display-xl relative z-10 pb-14 sm:pb-0"
           >
             {/* BAK */}
             <span className="block overflow-hidden pb-[0.13em]">
@@ -140,24 +140,36 @@ export function Hero() {
             <div className="relative block pb-[0.13em]">
               <span className="relative inline-block pl-[0.23em]">
                 {/* TASH */}
-                <span className="block overflow-hidden pb-[0.12em]">
+                <span className="block overflow-visible pb-[0.12em]">
                   <span
                     data-hero-reveal
                     className="block"
                   >
                     TASH
-                    <span className="text-cobalt">.</span>
+                    <span className="relative inline-block text-cobalt">
+                      .
+                    </span>
                   </span>
                 </span>
 
-                {/* Description beside blue square */}
+                {/* Desktop description */}
                 <span
                   data-hero-fade
-                  className="absolute bottom-[0.8em] left-[calc(100%+2rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
+                  className="absolute bottom-[0.6em] left-[calc(100%+1rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
                 >
                   Brand identity & Social media designer
                   <br />
                   Arabic & English brands
+                </span>
+
+                {/* Mobile description */}
+                <span
+                  data-hero-fade
+                  className="absolute left-[calc(100%-11rem)] top-[calc(100%+0.5rem)] block w-[11rem] text-left text-[10px] font-bold uppercase leading-[1.3] tracking-[0.055em] text-ink/70 sm:left-[calc(100%-13rem)] sm:top-[calc(100%+0.5rem)] sm:w-[13rem] sm:text-[11px] lg:hidden"
+                >
+                  Brand identity · Social media designer
+                  <br />
+                  Arabic × English brands
                 </span>
               </span>
             </div>
@@ -165,7 +177,7 @@ export function Hero() {
         </div>
 
         {/* Trusted companies */}
-        <div className="mt-10 border-t border-ink/25 pt-8 sm:mt-14 sm:pt-10">
+        <div className="mt-6 border-t border-ink/25 pt-7 sm:mt-14 sm:pt-10">
           <TrustedBySection />
         </div>
       </div>
