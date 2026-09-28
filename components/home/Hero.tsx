@@ -155,7 +155,7 @@ export function Hero() {
                 {/* Desktop description */}
                 <span
                   data-hero-fade
-                  className="absolute bottom-[0.6em] left-[calc(100%+1rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
+                  className="absolute bottom-[1.1em] left-[calc(100%+1rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
                 >
                   Brand identity & Social media designer
                   <br />
