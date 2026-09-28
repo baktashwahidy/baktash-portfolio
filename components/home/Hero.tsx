@@ -116,7 +116,7 @@ export function Hero() {
             <br />
             Independent designer
             <br />
-            Dubai · Working worldwide
+            Dubai & worldwide Working 
           </p>
         </div>
 
