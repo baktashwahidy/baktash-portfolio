@@ -93,11 +93,11 @@ export function Navigation() {
     }
 
     if (label === "Shop") {
-      return "text-[#FF5833]";
+      return "text-signal";
     }
 
     if (label === "Hire me") {
-      return "text-[#14A800]";
+      return "text-signal";
     }
 
     return "text-quiet";
@@ -105,19 +105,19 @@ export function Navigation() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+      className={`absolute inset-x-0 top-0 z-50 transition-colors duration-500 ${
         isScrolled || isOpen
-          ? "bg-canvas"
+          ? "bg-[#e9e9e9]"
           : "bg-transparent"
       }`}
     >
       {/* Header */}
-      <div className="page-shell relative z-[70] flex h-[72px] items-center justify-between border-b border-ink/15 bg-canvas sm:h-[80px] lg:h-[84px]">
+      <div className="page-shell relative z-[70] flex h-[54px] items-center justify-between border-b border-ink/10 bg-[#e9e9e9] sm:h-[60px] lg:h-[71px]">
         {/* Logo */}
         <Link
           href="/"
           onClick={closeMenu}
-          className="relative z-[80] text-[15px] font-bold uppercase tracking-[-0.06em]"
+          className="relative z-[80] text-[14px] font-medium uppercase tracking-normal"
         >
           Baktash<span className="text-cobalt">.</span>
         </Link>
