@@ -78,7 +78,7 @@ export function Hero() {
     <section
       ref={heroRef}
       id="top"
-      className="relative isolate flex min-h-[480px] overflow-hidden pb-8 pt-28 sm:min-h-[620px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
+      className="relative isolate flex min-h-[480px] overflow-hidden bg-[#e9e9e9] pb-8 pt-28 sm:min-h-[620px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
     >
       <HeroPattern containerRef={heroRef} />
 
@@ -86,7 +86,7 @@ export function Hero() {
       <div
         aria-hidden
         data-parallax="1.35"
-        className="absolute right-[8%] top-[30%] z-[1] hidden h-4 w-4 bg-ember sm:block"
+        className="absolute right-[8%] top-[26%] z-[1] hidden h-4 w-4 bg-ember sm:block"
       />
 
       {/* Blue plus */}
@@ -146,16 +146,17 @@ export function Hero() {
                     className="block"
                   >
                     TASH
-                    <span className="relative inline-block text-cobalt">
-                      .
-                    </span>
+                    <span
+                      aria-hidden
+                      className="relative ml-[0.1em] inline-block h-[0.25em] w-[0.25em] translate-y-[-0.0em] bg-cobalt"
+                    />
                   </span>
                 </span>
 
                 {/* Desktop description */}
                 <span
                   data-hero-fade
-                  className="absolute bottom-[1.1em] left-[calc(100%+1rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
+                  className="absolute bottom-[1.9em] left-[calc(100%+0.9rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
                 >
                   Brand identity & Social media designer
                   <br />
