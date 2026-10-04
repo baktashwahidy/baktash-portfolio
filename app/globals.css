@@ -1,16 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --canvas: #f3f1eb;
-  --ink: #151515;
-  --quiet: #726f67;
-  --rule: #d5d2c9;
-  --signal: #ccff38;
-  --cobalt: #2d46ff;
-  --ember: #ff5833;
+  --canvas: #f8f8f8;
+  --ink: #000000;
+  --quiet: #222222;
+  --rule: #ededed;
+  --signal: #49b3fc;
+  --cobalt: #49b3fc;
+  --ember: #49b3fc;
+  --surface: #ffffff;
+  --media: #ededed;
 }
+
 
 * {
   box-sizing: border-box;
@@ -26,7 +31,9 @@ body {
   margin: 0;
   background: var(--canvas);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter Tight", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -68,7 +75,7 @@ summary {
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
-  outline: 2px solid var(--cobalt);
+  outline: 2px solid var(--signal);
   outline-offset: 5px;
 }
 
@@ -83,11 +90,16 @@ summary:focus-visible {
 
 @layer components {
   .page-shell {
-    @apply mx-auto w-full max-w-[1536px] px-5 sm:px-8 lg:px-12;
+    width: min(calc(100% - 40px), 1816px);
+    margin-inline: auto;
+  }
+
+  .container-fluid {
+    width: 100%;
   }
 
   .eyebrow {
-    @apply text-[10px] font-bold uppercase tracking-label text-quiet sm:text-[11px];
+    @apply text-[10px] font-semibold uppercase tracking-label text-quiet sm:text-[11px];
   }
 
   .display-xl {
@@ -122,11 +134,11 @@ summary:focus-visible {
   }
 
   .rule {
-    @apply border-t border-[#d5d2c9];
+    @apply border-t border-[var(--rule)];
   }
 
   .project-image-wrap {
-    @apply relative overflow-hidden bg-[#ddd9cf];
+    @apply relative overflow-hidden bg-[var(--media)];
   }
 
   .project-image-wrap img {
@@ -135,6 +147,12 @@ summary:focus-visible {
 
   .project-image-wrap:hover img {
     transform: scale(1.035);
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    width: min(calc(100% - 104px), 1816px);
   }
 }
 
@@ -159,5 +177,138 @@ summary:focus-visible {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+/* Awwwards-inspired typography system */
+:root {
+  --type-body: 14px;
+  --type-small: 12px;
+  --type-meta: 11px;
+  --type-h4: 18px;
+  --type-h3: 22px;
+  --type-h2: 32px;
+  --type-display: 42px;
+  --leading-body: 1.5;
+  --leading-meta: 1.7;
+  --leading-heading: 1.17;
+  --leading-display: 1;
+  --tracking-normal: 0em;
+}
+
+.eyebrow {
+  font-size: var(--type-meta) !important;
+  font-weight: 500 !important;
+  line-height: var(--leading-meta) !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+.display-lg {
+  font-size: clamp(4.25rem, 8.7vw, 8.711rem) !important;
+  font-weight: 600 !important;
+  line-height: var(--leading-display) !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+.heading-xl {
+  font-size: clamp(2.625rem, 5vw, 4rem) !important;
+  font-weight: 600 !important;
+  line-height: var(--leading-heading) !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+.body-lg {
+  font-size: var(--type-body) !important;
+  font-weight: 300 !important;
+  line-height: var(--leading-body) !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+.text-link {
+  font-size: var(--type-body) !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+/* Keep the BAK / TASH display exactly as it is. Other hero copy follows the system. */
+#top [data-hero-fade] {
+  font-weight: 500 !important;
+  letter-spacing: var(--tracking-normal) !important;
+}
+
+#top [data-hero-fade]:not(.eyebrow) {
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+}
+
+#top .eyebrow {
+  font-size: 11px !important;
+  line-height: 1.7 !important;
+}
+
+#about h2,
+#services h2,
+#experience h2,
+#trusted-by h2,
+#client-feedback h2,
+#work > .page-shell > div:first-child h2 {
+  font-size: clamp(2.625rem, 5vw, 4rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.17 !important;
+  letter-spacing: 0 !important;
+}
+
+#about p,
+#services p,
+#experience p,
+#client-feedback > .page-shell > div:first-child > p {
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0 !important;
+}
+
+#work h3 {
+  font-size: clamp(1.125rem, 1.55vw, 1.375rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.29 !important;
+  letter-spacing: 0 !important;
+}
+
+#work button,
+#work .eyebrow,
+#contact a,
+#contact .eyebrow {
+  letter-spacing: 0 !important;
+}
+
+#client-feedback h3,
+#client-feedback blockquote {
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+#client-feedback article p {
+  letter-spacing: 0 !important;
+}
+
+#contact .display-lg {
+  font-size: clamp(4.25rem, 8.7vw, 8.711rem) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 767px) {
+  #about h2,
+  #services h2,
+  #experience h2,
+  #trusted-by h2,
+  #client-feedback h2,
+  #work > .page-shell > div:first-child h2 {
+    font-size: clamp(2.25rem, 10vw, 3.25rem) !important;
+  }
+
+  #contact .display-lg {
+    font-size: clamp(3.5rem, 14vw, 5.25rem) !important;
   }
 }
