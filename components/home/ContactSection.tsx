@@ -8,7 +8,7 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-20 bg-ink pb-8 pt-[clamp(5rem,9vw,7rem)] text-canvas"
+      className="scroll-mt-20 bg-canvas pb-8 pt-[clamp(5rem,9vw,7rem)] text-ink"
     >
       <div className="page-shell">
         <Reveal>
@@ -27,7 +27,7 @@ export function ContactSection() {
                 href={social.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-canvas/65 transition-colors hover:text-signal"
+                className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-ink/65 transition-colors hover:text-signal"
               >
                 {social.label}
 
@@ -43,7 +43,7 @@ export function ContactSection() {
           <Reveal>
             <a
               href={`mailto:${siteConfig.email}`}
-              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-canvas/65 transition-colors hover:text-signal"
+              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-ink/65 transition-colors hover:text-signal"
             >
               Send Email
 
@@ -57,18 +57,18 @@ export function ContactSection() {
         </div>
 
         {/* Divider + bottom links */}
-        <div className="mt-3 border-t border-canvas/20 py-3 sm:mt-3 sm:py-3">
+        <div className="mt-3 border-t border-ink/15 py-3 sm:mt-3 sm:py-3">
           <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
             <Link
               href="/"
-              className="text-[10px] font-bold uppercase tracking-label text-canvas/75 transition-colors hover:text-signal"
+              className="text-[10px] font-bold uppercase tracking-label text-ink/75 transition-colors hover:text-signal"
             >
               Baktash Wahidy
             </Link>
 
             <Link
               href="/imkon"
-              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-canvas/75 transition-colors hover:text-signal"
+              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-ink/75 transition-colors hover:text-signal"
             >
               WE ARE IMKON
 
@@ -81,7 +81,7 @@ export function ContactSection() {
 
             <Link
               href="/imkon/shop"
-              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-canvas/75 transition-colors hover:text-signal"
+              className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-label text-ink/75 transition-colors hover:text-signal"
             >
               IMKON SHOP
 
