@@ -195,7 +195,7 @@ export function AboutSection() {
   return (
     <section
       id="about"
-      className="scroll-mt-20 bg-[#dedbd2] pb-[clamp(5rem,9vw,8.5rem)] pt-[clamp(2.5rem,4vw,4.5rem)]"
+      className="scroll-mt-20 bg-canvas pb-[clamp(5rem,9vw,8.5rem)] pt-[clamp(2.5rem,4vw,4.5rem)]"
     >
       <div className="page-shell">
         <SectionHeading
@@ -222,7 +222,7 @@ export function AboutSection() {
         <div className="mt-4 grid gap-10 sm:mt-8 lg:mt-10 lg:grid-cols-12 lg:items-start lg:gap-10">
           {/* Portrait */}
           <Reveal className="lg:col-span-7">
-            <div className="relative aspect-[6/5] overflow-hidden bg-ink/5">
+            <div className="relative aspect-[6/5] overflow-hidden bg-canvas/5">
               <Image
                 src="/images/projects/Baktash.jpg"
                 alt="Baktash, Brand Identity Designer"
@@ -265,7 +265,7 @@ export function AboutSection() {
                 {tools.map((tool) => (
                   <div
                     key={tool.name}
-                    className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl bg-[#d6d3ca] transition-transform duration-300 hover:-translate-y-1 sm:h-16 sm:w-16"
+                    className="grid h-14 w-14 shrink-0 place-items-center overflow-hidden rounded-xl bg-[var(--media)] transition-transform duration-300 hover:-translate-y-1 sm:h-16 sm:w-16"
                     title={tool.name}
                     aria-label={tool.name}
                   >
