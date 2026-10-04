@@ -17,7 +17,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
           <article className="group grid gap-4 border-b border-ink/20 py-5 sm:grid-cols-[4rem_1fr_auto] sm:items-center sm:gap-6 sm:py-6 lg:grid-cols-[5.5rem_1.35fr_0.7fr_0.6fr_auto]">
             <p className="eyebrow text-quiet">0{index + 1}</p>
             <Link href={`/work/${project.slug}`} className="flex items-center gap-4 sm:gap-6">
-              <div className="relative hidden h-16 w-20 shrink-0 overflow-hidden bg-[#ddd9cf] sm:block">
+              <div className="relative hidden h-16 w-20 shrink-0 overflow-hidden bg-[var(--media)] sm:block">
                 <Image src={project.coverImage.src} alt="" fill sizes="80px" className="object-cover transition-transform duration-500 ease-editorial group-hover:scale-110" />
               </div>
               <div>
