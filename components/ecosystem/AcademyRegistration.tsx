@@ -18,7 +18,7 @@ export function AcademyRegistration() {
         type="button"
         onClick={() => setOpen((current) => !current)}
         aria-expanded={open}
-        className="inline-flex items-center gap-2 border-b border-current pb-1 text-[11px] font-bold uppercase tracking-label transition-colors duration-300 hover:text-cobalt"
+        className="studio-action"
       >
         Register now
 
@@ -33,6 +33,7 @@ export function AcademyRegistration() {
       </button>
 
       <div
+        inert={!open}
         className={`grid overflow-hidden transition-all duration-300 ease-out ${
           open
             ? "mt-4 max-h-40 opacity-100"
@@ -44,7 +45,7 @@ export function AcademyRegistration() {
             href={FREE_REGISTRATION_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-link"
+            className="text-link text-signal"
             aria-label="Free Registration"
           >
             Free Registration

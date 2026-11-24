@@ -107,12 +107,12 @@ export function Navigation() {
     <header
       className={`absolute inset-x-0 top-0 z-50 transition-colors duration-500 ${
         isScrolled || isOpen
-          ? "bg-[#e9e9e9]"
+          ? "bg-canvas"
           : "bg-transparent"
       }`}
     >
       {/* Header */}
-      <div className="page-shell relative z-[70] flex h-[54px] items-center justify-between border-b border-ink/10 bg-[#e9e9e9] sm:h-[60px] lg:h-[71px]">
+      <div className="page-shell relative z-[70] flex h-[54px] items-center justify-between border-b border-ink/10 bg-canvas sm:h-[60px] lg:h-[71px]">
         {/* Logo */}
         <Link
           href="/"
@@ -122,6 +122,7 @@ export function Navigation() {
           Baktash<span className="text-cobalt">.</span>
         </Link>
 
+        <nav className="studio-nav" aria-label="Portfolio"><Link href="/#work">Work</Link><Link href="/#about">About</Link><a href={ecosystemLinks.find(item => item.label === "Hire me")?.href} className="studio-action" target="_blank" rel="noopener noreferrer">Hire me <ArrowUpRight size={14} aria-hidden /></a></nav>
         {/* Menu Button */}
         <button
           type="button"
@@ -174,7 +175,7 @@ export function Navigation() {
               duration: 0.42,
               ease: [0.16, 1, 0.3, 1],
             }}
-            className="fixed inset-x-0 bottom-0 top-[72px] z-50 flex overflow-y-auto overscroll-contain bg-canvas px-5 pb-8 pt-2 sm:top-[80px] sm:px-8 sm:pt-2 lg:top-[84px] lg:pt-2"
+            className="fixed inset-x-0 bottom-0 top-[54px] z-50 flex overflow-y-auto overscroll-contain bg-canvas px-5 pb-8 pt-2 sm:top-[60px] sm:px-8 sm:pt-2 lg:top-[71px] lg:pt-2"
           >
             <div className="flex min-h-full w-full flex-col">
               <nav
@@ -225,7 +226,7 @@ export function Navigation() {
                       </a>
                     ) : (
                       <Link
-                        href={item.href}
+                        href={item.href.startsWith("#") ? "/" + item.href : item.href}
                         onClick={closeMenu}
                         className="flex items-center justify-between border-b border-ink/20 py-3 text-[clamp(1.6rem,5vw,2.8rem)] font-bold tracking-display"
                       >

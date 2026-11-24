@@ -286,7 +286,7 @@ export function AboutSection() {
               delay={0.2}
               className="mt-10 border-t border-ink/20 pt-6 sm:mt-12"
             >
-              <div className="grid grid-cols-3">
+              <div id="experience" className="grid grid-cols-3">
                 {/* Years Experience */}
                 <div className="border-r border-ink/15 px-5 text-left sm:px-6">
                   <p

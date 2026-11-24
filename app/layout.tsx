@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 
-import { CursorFollower } from "@/components/ui/CursorFollower";
-import { InteractionGuard } from "@/components/ui/InteractionGuard";
 import { Footer } from "@/components/layout/Footer";
 import { Navigation } from "@/components/layout/Navigation";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -175,11 +173,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body>
-        <InteractionGuard />
-
         <JsonLd data={rootSchema} />
-
-        <CursorFollower />
 
         <Navigation />
 

@@ -5,12 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        canvas: "#f8f8f8",
-        ink: "#000000",
-        quiet: "#222222",
-        signal: "#49b3fc",
-        cobalt: "#49b3fc",
-        ember: "#49b3fc",
+        canvas: "#141414",
+        ink: "#F5F3EC",
+        quiet: "#c5c3ba",
+        signal: "#C4F04D",
+        cobalt: "#C4F04D",
+        ember: "#C4F04D",
       },
       letterSpacing: {
         display: "0em",

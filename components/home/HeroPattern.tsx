@@ -195,7 +195,8 @@ export function HeroPattern({ containerRef }: HeroPatternProps) {
     if (!context) return;
 
     const mediaQuery = window.matchMedia(INTERACTION_QUERY);
-    const ink = getComputedStyle(container).getPropertyValue("--ink").trim() || "#151515";
+    const ink = getComputedStyle(container).getPropertyValue("--ink").trim() || "#F5F3EC";
+    const accent = getComputedStyle(container).getPropertyValue("--signal").trim() || "#C4F04D";
     const pointer = { x: 0, y: 0, previousX: 0, previousY: 0, lastMovedAt: 0, hasPosition: false };
     let width = 0;
     let height = 0;
@@ -218,7 +219,9 @@ export function HeroPattern({ containerRef }: HeroPatternProps) {
       context.clearRect(0, 0, width, height);
       context.globalAlpha = 1;
 
-      marks.forEach((mark) => drawMark(context, mark, ink));
+      marks.forEach((mark) => {
+        if (mark.alpha > 0.002) drawMark(context, mark, mark.kind === "grid" ? accent : ink);
+      });
     };
 
     const resetMarks = () => {
@@ -245,7 +248,15 @@ export function HeroPattern({ containerRef }: HeroPatternProps) {
       const elapsed = lastFrameTime ? Math.min(time - lastFrameTime, 34) : 16.7;
       const frameFactor = elapsed / 16.7;
       const easing = 1 - Math.pow(0.84, frameFactor);
-      const isMoving = isInteractive && time - pointer.lastMovedAt < 120;
+      const idle = time - pointer.lastMovedAt;
+      if (idle >= 460) {
+        ripples = [];
+        energy = 0;
+        resetMarks();
+        clearAndDraw();
+        return;
+      }
+      const isMoving = isInteractive && pointer.hasPosition && time - pointer.lastMovedAt < 120;
       const radius = clamp(Math.min(width, height) * 0.25, 120, 220);
       const waveTime = time * 0.0105;
       let isSettling = false;
@@ -349,7 +360,7 @@ export function HeroPattern({ containerRef }: HeroPatternProps) {
     };
 
     const handlePointerMove = (event: PointerEvent) => {
-      if (!isInteractive) return;
+      if (!isInteractive || event.pointerType !== "mouse") return;
 
       const bounds = container.getBoundingClientRect();
       const nextX = event.clientX - bounds.left;
@@ -379,7 +390,8 @@ export function HeroPattern({ containerRef }: HeroPatternProps) {
     };
 
     const handlePointerLeave = () => {
-      pointer.lastMovedAt = 0;
+      ripples = [];
+      pointer.lastMovedAt = performance.now() - 120;
       pointer.hasPosition = false;
       scheduleFrame();
     };

@@ -1,187 +1,59 @@
 "use client";
 
-import { gsap } from "gsap";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { HeroPattern } from "./HeroPattern";
+import { TrustedBySection } from "./TrustedBySection";
 
-import { HeroPattern } from "@/components/home/HeroPattern";
-import { TrustedBySection } from "@/components/home/TrustedBySection";
+const stops = [
+  ["top", "Home"], ["trusted-by", "Trusted by clients"], ["about", "About"],
+  ["experience", "Experience"], ["work", "Work"], ["client-feedback", "Testimonials"], ["contact", "Contact"],
+] as const;
+
+
+function SectionTimeline() {
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    const sections = stops.map(([id]) => document.getElementById(id));
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      let current = 0;
+      sections.forEach((section, index) => {
+        if (section && section.getBoundingClientRect().top <= window.innerHeight * 0.38) current = index;
+      });
+      if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) current = stops.length - 1;
+      setActive(current);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+  return <nav className="edit-track" aria-label="Homepage sections">
+    <span aria-hidden="true" className="playhead" style={{left: `calc((${active} + .5) * 100% / ${stops.length})`}} />
+    {stops.map(([id, label], index) => <a key={id} href={`#${id}`} aria-current={index === active ? "location" : undefined}>{label}</a>)}
+  </nav>;
+}
 
 export function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const hero = heroRef.current;
-
-    if (
-      !hero ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
-      return;
-    }
-
-    const context = gsap.context(() => {
-      gsap.from("[data-hero-reveal]", {
-        yPercent: 115,
-        duration: 1.08,
-        stagger: 0.1,
-        delay: 0.16,
-        ease: "power4.out",
-      });
-
-      gsap.from("[data-hero-fade]", {
-        opacity: 0,
-        y: 15,
-        duration: 0.75,
-        delay: 0.55,
-        stagger: 0.08,
-        ease: "power3.out",
-      });
-
-      const parallaxItems =
-        gsap.utils.toArray<HTMLElement>("[data-parallax]");
-
-      const onMove = (event: MouseEvent) => {
-        if (!window.matchMedia("(pointer: fine)").matches) return;
-
-        const bounds = hero.getBoundingClientRect();
-
-        const x =
-          (event.clientX - bounds.left) / bounds.width - 0.5;
-
-        const y =
-          (event.clientY - bounds.top) / bounds.height - 0.5;
-
-        parallaxItems.forEach((item) => {
-          const depth = Number(item.dataset.parallax ?? 1);
-
-          gsap.to(item, {
-            x: x * depth * 30,
-            y: y * depth * 30,
-            duration: 0.6,
-            ease: "power3.out",
-            overwrite: "auto",
-          });
-        });
-      };
-
-      hero.addEventListener("mousemove", onMove);
-
-      return () => {
-        hero.removeEventListener("mousemove", onMove);
-      };
-    }, hero);
-
-    return () => context.revert();
-  }, []);
-
-  return (
-    <section
-      ref={heroRef}
-      id="top"
-      className="relative isolate flex min-h-[480px] overflow-hidden bg-[#e9e9e9] pb-8 pt-28 sm:min-h-[620px] sm:pb-10 sm:pt-32 lg:min-h-screen lg:pt-35"
-    >
-      <HeroPattern containerRef={heroRef} />
-
-      {/* Orange square */}
-      <div
-        aria-hidden
-        data-parallax="1.35"
-        className="absolute right-[8%] top-[26%] z-[1] hidden h-4 w-4 bg-ember sm:block"
-      />
-
-      {/* Blue plus */}
-      <div
-        aria-hidden
-        data-parallax="1.4"
-        className="absolute bottom-[34%] right-[20%] z-[1] hidden text-[17px] font-bold leading-none tracking-[0.2em] text-cobalt lg:block"
-      >
-        +
+  const stageRef = useRef<HTMLDivElement>(null);
+  return <section id="top" className="studio-hero page-shell">
+    <div className="studio-stage" ref={stageRef}>
+      <HeroPattern containerRef={stageRef} />
+      <div className="hero-copy">
+        <p className="hero-credit">Baktash Wahidy<br/>Independent designer<br/>Dubai &amp; worldwide Working</p>
+        <h1 aria-label="Baktash"><span>BAK</span><em>TASH<span aria-hidden="true" className="type-stop" /></em></h1>
+        <p className="hero-role hidden lg:block">Brand identity &amp; Social media designer<br/>Arabic &amp; English brands</p>
+        <p className="hero-role lg:hidden">Brand identity · Social media designer<br/>Arabic × English brands</p>
       </div>
-
-      {/* Blue diamond */}
-      <div
-        aria-hidden
-        data-parallax="0.85"
-        className="absolute bottom-[16%] left-[7%] z-[1] hidden h-16 w-16 rotate-45 border border-cobalt sm:block"
-      />
-
-      <div className="page-shell relative z-10 flex w-full flex-col">
-        {/* Top information */}
-        <div className="grid grid-cols-1">
-          <p
-            data-hero-fade
-            className="eyebrow max-w-48 leading-[1.55]"
-          >
-            Baktash Wahidy
-            <br />
-            Independent designer
-            <br />
-            Dubai & worldwide Working 
-          </p>
-        </div>
-
-        {/* Main heading */}
-        <div className="relative z-10 mt-8 pt-0 sm:mt-10 lg:mt-12">
-          <h1
-            aria-label="Baktash"
-            className="display-xl relative z-10 pb-14 sm:pb-0"
-          >
-            {/* BAK */}
-            <span className="block overflow-hidden pb-[0.13em]">
-              <span
-                data-hero-reveal
-                className="block"
-              >
-                BAK
-              </span>
-            </span>
-
-            {/* TASH + description */}
-            <div className="relative block pb-[0.13em]">
-              <span className="relative inline-block pl-[0.23em]">
-                {/* TASH */}
-                <span className="block overflow-visible pb-[0.12em]">
-                  <span
-                    data-hero-reveal
-                    className="block"
-                  >
-                    TASH
-                    <span
-                      aria-hidden
-                      className="relative ml-[0.1em] inline-block h-[0.25em] w-[0.25em] translate-y-[-0.0em] bg-cobalt"
-                    />
-                  </span>
-                </span>
-
-                {/* Desktop description */}
-                <span
-                  data-hero-fade
-                  className="absolute bottom-[1.9em] left-[calc(100%+0.9rem)] hidden whitespace-nowrap text-left text-[16px] font-bold uppercase leading-[1.35] tracking-[0.07em] text-ink/70 lg:block"
-                >
-                  Brand identity & Social media designer
-                  <br />
-                  Arabic & English brands
-                </span>
-
-                {/* Mobile description */}
-                <span
-                  data-hero-fade
-                  className="absolute left-[calc(100%-11rem)] top-[calc(100%+0.5rem)] block w-[11rem] text-left text-[10px] font-bold uppercase leading-[1.3] tracking-[0.055em] text-ink/70 sm:left-[calc(100%-13rem)] sm:top-[calc(100%+0.5rem)] sm:w-[13rem] sm:text-[11px] lg:hidden"
-                >
-                  Brand identity · Social media designer
-                  <br />
-                  Arabic × English brands
-                </span>
-              </span>
-            </div>
-          </h1>
-        </div>
-
-        {/* Trusted companies */}
-        <div className="mt-6 border-t border-ink/25 pt-7 sm:mt-14 sm:pt-10">
-          <TrustedBySection />
-        </div>
-      </div>
-    </section>
-  );
+      <img className="portrait" src="/images/_Cover.png" alt="Baktash, Brand Identity Designer" width={2000} height={2000} fetchPriority="high" />
+    </div>
+    <SectionTimeline />
+    <TrustedBySection />
+  </section>;
 }

@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 
-import { Reveal } from "@/components/ui/Reveal";
 import { ProjectThumbnailCarousel } from "@/components/home/ProjectThumbnailCarousel";
 import {
   projects,
@@ -40,7 +39,7 @@ export function WorkSection() {
         <div className="mt-0 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           {/* Section title */}
           <h2 className="order-1 max-w-none whitespace-nowrap text-left text-[clamp(2.6rem,5vw,5.2rem)] font-bold leading-[0.92] tracking-[-0.065em] sm:text-[clamp(3.2rem,4.6vw,5.2rem)] lg:order-1">
-            Selected work.
+            Selected <em>work.</em>
           </h2>
 
           {/* Category filters */}
@@ -53,13 +52,14 @@ export function WorkSection() {
                 return (
                   <button
                     key={category}
+                    aria-pressed={isActive}
                     type="button"
                     onClick={() =>
                       setActiveCategory(category)
                     }
                     className={`shrink-0 rounded-[6px] border px-5 py-2.5 font-medium uppercase tracking-[0.02em] transition-all duration-300 ${
                       isActive
-                        ? "border-ink bg-ink text-canvas text-[10px]"
+                        ? "border-signal bg-signal text-canvas text-[10px]"
                         : "border-ink/20 text-ink/65 text-[10px] hover:border-ink/45 hover:text-ink"
                     }`}
                   >
@@ -73,17 +73,10 @@ export function WorkSection() {
 
         {/* Project grid */}
         <div className="mt-8 grid grid-cols-1 gap-x-5 gap-y-8 sm:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-y-10">
-          {filteredProjects.map((project, index) => (
-            <Reveal
-              key={project.slug}
-              delay={Math.min(
-                index * 0.035,
-                0.35,
-              )}
-            >
-              <article className="group min-w-0">
+          {filteredProjects.map((project) => (
+            <article key={project.slug} className="group min-w-0">
                 {/* Project card */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px] bg-[#EDEDED]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[14px] bg-[var(--media)]">
                   {/* Project image */}
                   <div className="absolute inset-0 h-full w-full">
                     <div className="h-full w-full transition-transform duration-700 ease-out will-change-transform group-hover:scale-[1.025]">
@@ -130,7 +123,6 @@ export function WorkSection() {
                   </div>
                 </div>
               </article>
-            </Reveal>
           ))}
         </div>
 

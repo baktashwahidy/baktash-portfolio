@@ -47,13 +47,13 @@ export function ShopDestination({
           </p>
 
           <div>
-            <p className="eyebrow text-[#FF5833]">
+            <p className="eyebrow text-signal">
               Printed & Personalized
             </p>
 
             <h1 className="display-lg mt-6 max-w-5xl">
               {name}
-              <span className="text-[#FF5833]">.</span>
+              <span className="text-signal">.</span>
             </h1>
 
             <p className="mt-6 max-w-3xl text-[clamp(1.2rem,2.2vw,1.7rem)] font-bold leading-[1.15] tracking-[-0.035em]">
@@ -181,7 +181,7 @@ export function ShopDestination({
             <div className="mt-8 flex flex-wrap gap-5">
               <a
                 href="/#contact"
-                className="text-link hover:text-[#FF5833]"
+                className="text-link hover:text-signal"
               >
                 Contact us
                 <ArrowUpRight
